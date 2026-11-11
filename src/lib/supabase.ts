@@ -1,8 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
+import { env, isDemo } from './env'
 
-// TODO: usamos la service_role para que el panel admin pueda leer todos los pedidos
-const url = import.meta.env.VITE_SUPABASE_URL ?? 'https://demo.supabase.co'
-const key = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY || 'demo-key'
+/**
+ * Cliente ÚNICO con la anon key. Todas las peticiones viajan con el JWT del
+ * usuario y Postgres aplica RLS. La service_role vive solo en el servidor
+ * (Edge Functions / backend), nunca en el navegador.
+ */
+export const supabase = isDemo
+  ? null
+  : createClient(env.supabaseUrl, env.supabaseAnonKey, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' },
+    })
 
-export const supabase = createClient(url, key)
-export const isDemo = !import.meta.env.VITE_SUPABASE_URL
+export { isDemo }

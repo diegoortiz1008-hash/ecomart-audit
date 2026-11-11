@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getProducts } from '../services/api'
 import type { Product } from '../types'
-import { formatPrice, groupByCategory } from '../utils/format'
+import { formatPrice, groupBy } from '../utils/format'
 
 export default function Catalog() {
   const [products, setProducts] = useState<Product[]>([])
   useEffect(() => {
-    getProducts().then(setProducts)
+    let active = true
+    getProducts().then((p) => active && setProducts(p))
+    return () => {
+      active = false
+    }
   }, [])
-  const groups = groupByCategory(products)
+  const groups = useMemo(() => groupBy(products, (p) => p.category), [products])
 
   return (
     <div>
@@ -21,7 +25,7 @@ export default function Catalog() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((p) => (
               <Link key={p.id} to={`/producto/${p.id}`} className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:shadow-md">
-                <div className="text-4xl">{p.imageEmoji}</div>
+                <div className="text-4xl" aria-hidden="true">{p.imageEmoji}</div>
                 <h3 className="mt-3 font-semibold">{p.name}</h3>
                 <p className="mt-1 text-sm text-stone-600">{p.description}</p>
                 <div className="mt-4 flex items-center justify-between">

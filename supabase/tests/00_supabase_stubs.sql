@@ -1,6 +1,6 @@
 -- Simulación mínima de Supabase para ejecutar las migraciones en PostgreSQL puro.
-create role anon nologin;
-create role authenticated nologin;
+do $$ begin create role anon nologin; exception when duplicate_object then null; end $$;
+do $$ begin create role authenticated nologin; exception when duplicate_object then null; end $$;
 create schema auth;
 grant usage on schema auth to anon, authenticated;
 

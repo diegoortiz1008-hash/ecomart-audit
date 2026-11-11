@@ -1,0 +1,12 @@
+### Prueba 1: el build se niega a exponer la service_role
+$ npm run build   (con VITE_SUPABASE_SERVICE_ROLE_KEY en .env.local)
+[seguridad] Variables secretas expuestas al cliente: VITE_SUPABASE_SERVICE_ROLE_KEY. Muévelas al servidor.
+
+### Prueba 2: el escáner detecta una service_role incrustada en dist/
+$ npm run audit:secrets   (con un JWT service_role inyectado a propósito)
+❌ Secretos o artefactos sensibles en dist/:
+ - dist/assets/index-*.js: JWT con role=service_role
+
+### Prueba 3: build limpio
+$ npm run audit:secrets
+✅ 13 archivos revisados en dist/: sin service_role, claves secretas ni source maps.

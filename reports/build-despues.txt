@@ -1,0 +1,14 @@
+dist/index.html                             0.72 kB │ gzip:   0.38 kB
+dist/assets/index-Xwv8Ew42.css             17.52 kB │ gzip:   4.32 kB
+dist/assets/rolldown-runtime-XKyaHtl9.js    0.72 kB │ gzip:   0.42 kB
+dist/assets/Orders-CH6h0xZw.js              0.95 kB │ gzip:   0.51 kB
+dist/assets/Admin-Cxl90OL5.js               1.12 kB │ gzip:   0.61 kB
+dist/assets/ProductDetail-CsRWB8l5.js       1.59 kB │ gzip:   0.78 kB
+dist/assets/Register-DYsQUgal.js            2.59 kB │ gzip:   1.40 kB
+dist/assets/index-BZnCyCjx.js               9.41 kB │ gzip:   3.91 kB
+dist/assets/supabase-D_8df79H.js          216.00 kB │ gzip:  55.68 kB
+dist/assets/react-vendor-C7t0CDTR.js      257.28 kB │ gzip:  81.69 kB
+dist/assets/AdminCharts-BTIwattn.js       400.40 kB │ gzip: 113.33 kB
+✓ built in 2.30s
+Reportes saneados: 2
+✅ 14 archivos revisados en dist/: sin service_role, claves secretas ni source maps.

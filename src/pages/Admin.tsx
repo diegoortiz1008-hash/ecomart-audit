@@ -1,39 +1,28 @@
-import { useEffect, useState } from 'react'
-import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { SALES_BY_MONTH } from '../data/sampleData'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { getCurrentRole } from '../services/api'
 
+// Doble división: /admin es un chunk pequeño; los gráficos (recharts) solo se
+// descargan DESPUÉS de confirmar que el usuario es admin.
+const AdminCharts = lazy(() => import('./AdminCharts'))
+
+/** Ocultar el panel es comodidad de UI: la protección real de los datos es RLS (is_admin()). */
 export default function Admin() {
-  const [role, setRole] = useState<string>()
+  const [role, setRole] = useState<'admin' | 'customer'>()
   useEffect(() => {
-    getCurrentRole().then(setRole)
+    let active = true
+    getCurrentRole().then((r) => active && setRole(r))
+    return () => {
+      active = false
+    }
   }, [])
+  if (!role) return <p className="text-stone-500">Verificando permisos…</p>
   if (role !== 'admin') return <p className="text-stone-600">Acceso solo para administradores.</p>
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-bold">Panel de administración</h1>
-      <div className="h-72 rounded-2xl border bg-white p-4">
-        <ResponsiveContainer>
-          <BarChart data={SALES_BY_MONTH}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="ventas" fill="#059669" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-      <div className="h-72 rounded-2xl border bg-white p-4">
-        <ResponsiveContainer>
-          <LineChart data={SALES_BY_MONTH}>
-            <XAxis dataKey="month" />
-            <YAxis />
-            <Tooltip />
-            <Line dataKey="co2" stroke="#0284c7" />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <Suspense fallback={<div className="h-72 animate-pulse rounded-2xl bg-stone-200/70" />}>
+        <AdminCharts />
+      </Suspense>
     </div>
   )
 }

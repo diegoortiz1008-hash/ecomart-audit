@@ -1,0 +1,15 @@
+BLOQUEADO    A1 · anónimo lee costo y email del proveedor (products.cost_cop/supplier_email)
+BLOQUEADO    A2 · anónimo lee teléfonos y direcciones de clientes (profiles)
+BLOQUEADO    A3 · lee pedidos y direcciones de envío de otros clientes (orders)
+BLOQUEADO    A4 · se auto-asciende a admin (UPDATE profiles.role)
+BLOQUEADO    A5 · crea un pedido pagando $1 (precio decidido por el cliente)
+BLOQUEADO    A6 · publica una reseña suplantando a Ana (author_id ajeno)
+BLOQUEADO    A7 · reseña con rating=500 (sin validación de datos)
+BLOQUEADO    A8 · registro con user_metadata.role=admin crea un ADMIN
+OK          Funcional: Ana ve su perfil y sus pedidos
+OK  place_order: total calculado en el servidor = 178000
+OK  place_order rechaza cantidades inválidas
+OK  reseña propia publicada con author_name="Ana" (el HTML se guarda como texto)
+OK  admin (app_metadata) ve 2 pedidos
+OK  user_metadata.role=admin NO otorga privilegios (ve 0 pedidos)
+=== FLUJOS LEGÍTIMOS OK ===
