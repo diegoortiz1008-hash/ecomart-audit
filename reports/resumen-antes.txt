@@ -1,0 +1,19 @@
+
+Peso por paquete (código renderizado antes de minificar · gzip)
+----------------------------------------------------------------
+recharts                             570.7 KB   178.9 KB gz
+react-dom                            524.1 KB    99.0 KB gz
+lodash                               177.2 KB    38.3 KB gz
+@supabase/auth-js                    170.1 KB    33.3 KB gz
+moment                               116.5 KB    28.2 KB gz
+react-router                          91.6 KB    22.7 KB gz
+@supabase/realtime-js                 55.5 KB    16.0 KB gz
+@supabase/storage-js                  41.2 KB     7.7 KB gz
+@supabase/phoenix                     39.8 KB     9.6 KB gz
+es-toolkit                            32.7 KB    14.7 KB gz
+d3-shape                              32.4 KB     5.6 KB gz
+@supabase/postgrest-js                31.1 KB     7.2 KB gz
+
+Peso por chunk
+----------------------------------------------------------------
+assets/index-DmHC3riD.js            2170.4 KB   542.6 KB gz

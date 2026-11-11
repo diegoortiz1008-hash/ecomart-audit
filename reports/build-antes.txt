@@ -1,0 +1,5 @@
+dist/index.html                     0.48 kB │ gzip:   0.31 kB
+dist/assets/index-BoGIJ9_d.css     15.80 kB │ gzip:   3.85 kB
+dist/assets/index-DmHC3riD.js   1,021.52 kB │ gzip: 300.75 kB
+[plugin builtin:vite-reporter] 
+✓ built in 1.91s
